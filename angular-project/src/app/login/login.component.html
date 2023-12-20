@@ -1,0 +1,117 @@
+<div class="set-display">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-5">
+        <div class="card rounded-4 text-black">
+          <div class="row g-0">
+            <div class="col-lg">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <img src="../../assets/sis_th.png" alt="logo" />
+                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <!-- Username input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="username"
+                        >ชื่อผู้ใช้งาน</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="username"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && loginForm.controls['username'].errors
+                        }"
+                        id="username"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && loginForm.controls['username'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            loginForm.controls['username'].errors['required']
+                          "
+                        >
+                          กรุณาใส่ชื่อผู้ใช้งาน
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="password">รหัสผ่าน</label>
+                      <input
+                        type="password"
+                        formControlName="password"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && loginForm.controls['password'].errors
+                        }"
+                        id="password"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && loginForm.controls['password'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            loginForm.controls['password'].errors['required']
+                          "
+                        >
+                          กรุณาใส่รหัสผ่าน
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            loginForm.controls['password'].errors['minlength']
+                          "
+                        >
+                          กรุณาใส่รหัสผ่านมากกว่า 6 ตัว
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Login button -->
+                    <button type="submit" class="btn btn-primary">
+                      เข้าสู่ระบบ
+                    </button>
+
+                    <!-- Password input -->
+                    <div class="form-outline mt-3">
+                      <a href="#!" class="text-body">ลืมรหัสผ่าน?</a>
+                    </div>
+                  </form>
+                  <div class="card-body mb-2" routerLink="/register">
+                    <button type="submit" class="btn btn-outline-secondary">
+                      ผู้ใช้ใหม่? คลิกเพื่อสมัคร!!
+                    </button>
+                    <!-- Navigation links based on position
+                    <div *ngIf="position === 'admin'">
+                      <a routerLink="/admin">ไปที่หน้าแดชบอร์ดผู้ดูแลระบบ</a>
+                    </div>
+
+                    <div *ngIf="position === 'manager'">
+                      <a routerLink="/manager">ไปที่หน้าแดชบอร์ดผู้จัดการ</a>
+                    </div>
+
+                    <div *ngIf="position === 'user'">
+                      <a routerLink="/user">ไปที่หน้าแดชบอร์ดผู้ใช้ทั่วไป</a>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

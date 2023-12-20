@@ -1,0 +1,270 @@
+<div class="popup-overlay">
+  <div class="popup-content">
+    <h2 class="mb-4">เพิ่มสมาชิก</h2>
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <!-- Left column content here -->
+          <div class="form-outline mb-3">
+            <label for="username" class="form-label">ID: ผู้ใช้งาน</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+            />
+
+            <div
+              *ngIf="submitted && form.controls['username'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['username'].errors['required']
+                "
+              >
+                โปรดใส่ ID ผู้ใช้งาน
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="password" class="form-label">Password: ผู้ใช้งาน</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+            />
+            <div
+              *ngIf="submitted && form.controls['password'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['password'].errors['required']
+                "
+              >
+                กรุณาใส่รหัสผ่าน
+              </div>
+              <div
+                *ngIf="
+                  submitted && form.controls['password'].errors['minlength']
+                "
+              >
+                รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="prefix" class="form-label">คำนำหน้า:</label>
+            <select id="prefix" formControlName="prefix" class="form-control">
+              <option value="นาย">นาย</option>
+              <option value="นางสาว">นางสาว</option>
+              <option value="นาง">นาง</option>
+            </select>
+
+            <div
+              *ngIf="submitted && form.controls['prefix'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="submitted && form.controls['prefix'].errors['required']"
+              >
+                โปรดเลือกคำนำหน้า
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="firstName" class="form-label">ชื่อ:</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="form-control"
+            />
+
+            <div
+              *ngIf="submitted && form.controls['firstName'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['firstName'].errors['required']
+                "
+              >
+                โปรดใส่ชื่อ
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="lastName" class="form-label">นามสกุล:</label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control"
+            />
+          </div>
+          <!-- ... left column content ... -->
+          <div
+            *ngIf="submitted && form.controls['lastName'].errors"
+            class="text-danger"
+          >
+            <div
+              *ngIf="submitted && form.controls['lastName'].errors['required']"
+            >
+              โปรดใส่นามสกุล
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <!-- Right column content here -->
+
+          <!-- User level input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="position">ระดับผู้ใช้</label>
+            <select
+              formControlName="position"
+              id="position"
+              class="form-control form-control-lg"
+            >
+              <option value="" disabled selected>เลือกระดับผู้ใช้</option>
+              <option value="admin">Admin</option>
+              <option value="manager">Manager</option>
+              <option value="user">User</option>
+            </select>
+            <div
+              *ngIf="submitted && form.controls['position'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['position'].errors['required']
+                "
+              >
+                โปรดเลือกระดับผู้ใช้
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="department" class="form-label">แผนก:</label>
+            <select
+              id="department"
+              formControlName="department"
+              class="form-control form-control-lg"
+              (change)="onDepartmentChange()"
+            >
+              <option value="" disabled selected>เลือกแผนก</option>
+              <option *ngFor="let dep of getPositionsKeys()" [value]="dep">
+                {{ dep }}
+              </option>
+            </select>
+
+            <div
+              *ngIf="submitted && form.controls['department'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['department'].errors['required']
+                "
+              >
+                โปรดเลือกระดับแผนก
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="level" class="form-label">ตำแหน่ง:</label>
+            <select
+              id="level"
+              formControlName="level"
+              class="form-control form-control-lg"
+            >
+              <option value="" disabled selected>เลือกตำแหน่ง</option>
+              <option
+                *ngFor="let pos of levels[form.get('department')?.value]"
+                [value]="pos"
+              >
+                {{ pos }}
+              </option>
+            </select>
+
+            <div
+              *ngIf="submitted && form.controls['level'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="submitted && form.controls['level'].errors['required']"
+              >
+                โปรดเลือกระดับผู้ใช้
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label for="phoneNumber" class="form-label">เบอร์โทร:</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              class="form-control"
+            />
+            <div
+              *ngIf="submitted && form.controls['phoneNumber'].errors"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  submitted && form.controls['phoneNumber'].errors['required']
+                "
+              >
+                กรุณาใส่เบอร์โทร
+              </div>
+              <div
+                *ngIf="
+                  submitted && form.controls['phoneNumber'].errors['minlength']
+                "
+              >
+                เบอร์โทรต้องมีความยาวอย่างน้อย 10 ตัวเลข
+              </div>
+            </div>
+          </div>
+          <div class="form-outline mb-3">
+            <label for="email" class="form-label">อีเมล:</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control"
+            />
+          </div>
+          <!-- ... right column content ... -->
+          <div
+            *ngIf="submitted && form.controls['email'].errors"
+            class="text-danger"
+          >
+            <div *ngIf="submitted && form.controls['email'].errors['required']">
+              โปรดใส่อีเมล
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-grid gap-2">
+      <button type="button" (click)="onClose()" class="btn btn-secondary">
+        ปิด
+      </button>
+      <button type="button" (click)="onSave()" class="btn btn-primary">
+        บันทึก
+      </button>
+    </div>
+  </div>
+</div>

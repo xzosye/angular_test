@@ -1,0 +1,69 @@
+<!-- SIDEBAR -->
+<section id="sidebar" [ngClass]="status ? 'hide' : ''">
+  <a class="brand" href="/admin">
+    <img
+      src="../../assets/sis_th.png"
+      alt=""
+      class="d-inline-block align-text-top"
+    />
+  </a>
+  <ul class="side-menu top">
+    <li class="active">
+      <a href="/admin">
+        <i class="bx bxs-dashboard"></i>
+        <span class="text">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="angular-project\src\app\performance">
+        <i class="bx bxs-shopping-bag-alt"></i>
+        <span class="text">Performence</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="side-menu">
+    <li>
+      <a href="#">
+        <i class="bx bxs-cog"></i>
+        <span class="text">Settings</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="confirmLogout()" class="logout">
+        <i class="bx bxs-log-out-circle"></i>
+        <span class="text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <i (click)="addToggle()" class="bx bx-menu"></i>
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Search..." />
+        <button type="button" class="search-btn">
+          <i class="bx bx-search"></i>
+        </button>
+      </div>
+    </form>
+    <a href="#" class="notification">
+      <i class="bx bxs-bell"></i>
+      <span class="num">16</span>
+    </a>
+    <a href="#" class="profile">
+      <img src="../../assets/icon_user.png" />
+    </a>
+  </nav>
+  <!-- NAVBAR -->
+
+  <!-- MAIN -->
+  <main> <p>hello P</p></main>
+  <!-- MAIN -->
+</section>
+<!-- CONTENT -->

@@ -1,0 +1,228 @@
+<div class="popup-overlay">
+  <div class="popup-content">
+    <h2 class="mb-4">มอบหมายงาน</h2>
+    <form (ngSubmit)="sendEmail()" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="taskName" class="form-label">ชื่องาน:</label>
+        <input
+          type="text"
+          id="taskName"
+          name="taskName"
+          [(ngModel)]="taskData.taskName"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="emailContent" class="form-label">รายละเอียดงาน:</label>
+        <textarea
+          id="emailContent"
+          name="emailContent"
+          [(ngModel)]="taskData.emailContent"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="assignedBy" class="form-label">ชื่อผู้มอบหมายงาน:</label>
+        <input
+          type="text"
+          id="assignedBy"
+          name="assignedBy"
+          [(ngModel)]="taskData.assignedBy"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <button type="button" (click)="addAssignment()" class="btn btn-info">
+          <i class="fas fa-plus"></i> เพิ่มผู้รับ
+        </button>
+      </div>
+
+      <!-- รายการมอบหมายงาน -->
+      <div *ngFor="let assignment of assignments; let i = index">
+        <div class="mb-3">
+          <label for="depart" class="form-label">แผนก:</label>
+          <select
+            id="depart"
+            name="depart"
+            [(ngModel)]="assignment.departId"
+            (change)="getLevels(assignment.departId); onAssignmentChange(i)"
+            class="form-select"
+            required
+          >
+            <option value="" disabled selected>กรุณาเลือกแผนก</option>
+            <option
+              *ngFor="let department of departments"
+              [value]="department.depart_id"
+            >
+              {{ department.depart_name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- เลือกตำแหน่ง -->
+        <div class="mb-3">
+          <label for="level" class="form-label">ตำแหน่ง:</label>
+          <select
+            id="level"
+            name="level"
+            [(ngModel)]="assignment.levelId"
+            (change)="onAssignmentChange(i)"
+            class="form-select"
+            required
+          >
+            <option value="" disabled selected>กรุณาเลือกตำแหน่ง</option>
+            <option *ngFor="let level of levels" [value]="level.level_id">
+              {{ level.level_name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="assignedTo{{ i }}" class="form-label">มอบหมายให้:</label>
+          <select
+            id="assignedTo{{ i }}"
+            name="assignedTo{{ i }}"
+            [(ngModel)]="assignment.assignedTo"
+            class="form-select"
+            required
+          >
+            <option value="" disabled selected>กรุณาเลือกผู้ใช้</option>
+            <option
+              *ngFor="let user of assignment.users"
+              [value]="user.user_id"
+            >
+              {{ user.userdata_fname }} {{ user.userdata_lname }}
+            </option>
+          </select>
+        </div>
+
+        <!-- ปุ่มลบ -->
+        <div class="mb-3">
+          <button
+            type="button"
+            (click)="removeAssignment(i)"
+            class="btn btn-danger delete-button"
+          >
+            <i class="fas fa-trash"></i> ลบ
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="status" class="form-label">สถานะ:</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="taskData.status"
+          class="form-select"
+          required
+        >
+          <option value="มอบหมายงาน">มอบหมายงาน</option>
+        </select>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="startDate" class="form-label">วันที่เริ่มงาน:</label>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            [(ngModel)]="taskData.startDate"
+            class="form-control"
+          />
+        </div>
+        <div class="col">
+          <label for="endDate" class="form-label">วันที่สิ้นสุดงาน:</label>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            [(ngModel)]="taskData.endDate"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <!-- Email Recipients Table -->
+      <div class="mb-3">
+        <label class="form-label">
+          <i class="fas fa-envelope"></i> ผู้รับอีเมล:
+        </label>
+        <table class="table email-table">
+          <tbody>
+            <tr *ngFor="let recipient of emailRecipients; let i = index">
+              <td>
+                <input
+                  type="email"
+                  id="email{{ i }}"
+                  name="email{{ i }}"
+                  [(ngModel)]="recipient.email"
+                  class="form-control email-input"
+                />
+              </td>
+              <td class="remove-button">
+                <button
+                  type="button"
+                  (click)="removeRecipient(i)"
+                  class="btn btn-danger btn-sm delete-button"
+                >
+                  <i class="fas fa-trash"></i> ลบ
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="add-button">
+                <button
+                  type="button"
+                  (click)="addRecipient()"
+                  class="btn btn-info btn-sm"
+                >
+                  <i class="fas fa-user-plus"></i> เพิ่มผู้รับ
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <small class="form-text text-muted">
+          กรุณากรอกอีเมลผู้รับแยกด้วยเครื่องหมาย ',' (เช่น example1@gmail.com,
+          example2@gmail.com)
+        </small>
+      </div>
+
+      <div class="mb-3">
+        <label for="taskFiles" class="form-label">
+          <i class="fas fa-file-upload"></i> ไฟล์งาน (แนบไฟล์):
+        </label>
+        <input
+          type="file"
+          id="taskFiles"
+          name="taskFiles"
+          [(ngModel)]="taskData.taskFiles"
+          (change)="onFileChange($event)"
+          class="form-control"
+          multiple
+        />
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          (click)="closePopup.emit()"
+          class="btn btn-secondary"
+        >
+          <i class="fas fa-times"></i> ปิด
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> บันทึก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

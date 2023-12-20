@@ -1,0 +1,271 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/manager">
+      <img
+        src="../../assets/sis_th.png"
+        alt=""
+        class="d-inline-block align-text-top"
+      />
+    </a>
+
+    <div class="d-flex align-items-center">
+      <span class="me-3">ยินดีต้อนรับคุณ {{ loggedInUsername }}</span>
+      <button class="btn btn mt-3" (click)="confirmLogout()">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HTML -->
+<div class="container mt-4">
+  <div class="banner">
+    <h1>Dashboard Manager account</h1>
+  </div>
+
+  <div class="dashboard">
+    <!-- มอบหมายงาน (Tasks) -->
+    <div class="dashboard-item">
+      <div class="dashboard-header">
+        <h3><i class="bi bi-file-earmark-text"></i> มอบหมายงาน</h3>
+        <div class="open-icon" (click)="showTaskPopup()">
+          <i class="bi bi-plus-circle"></i>
+        </div>
+      </div>
+
+      <!-- กล่องผลการดำเนินงาน -->
+      <div class="dashboard-header">
+        <h3><i class="bi bi-check2-square"></i> ผลการดำเนินงาน</h3>
+        <div class="open-icon" (click)="goToPerformance()">
+          <i class="bi bi-file-earmark-text"></i>
+        </div>
+      </div>
+
+      <!-- กล่องสมัครสมาชิก -->
+      <div class="dashboard-header">
+        <h3><i class="bi bi-person-plus"></i> เพิ่มสมาชิก</h3>
+        <div class="open-icon" (click)="showSignupPopup()">
+          <i class="bi bi-person-fill-add"></i>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <!-- ... ส่วนของตาราง ... -->
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup for Signup -->
+<div class="popup-overlay" *ngIf="showPopup">
+  <div class="popup-content">
+    <h2 class="mb-4">เพิ่มสมาชิก</h2>
+    <form>
+      <div class="mb-3">
+        <label for="email" class="form-label">อีเมล/ผู้ใช้:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="title" class="form-label">คำนำหน้า:</label>
+          <select id="title" name="title" class="form-select" required>
+            <option value="" disabled selected>เลือกคำนำหน้า</option>
+            <option value="Mr.">นาย</option>
+            <option value="Mrs.">นาง</option>
+            <option value="Miss">นางสาว</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="firstName" class="form-label">ชื่อ:</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">นามสกุล:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">รหัสผ่าน:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="phoneNumber" class="form-label">เบอร์โทร:</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="emailAddress" class="form-label">อีเมล:</label>
+        <input
+          type="email"
+          id="emailAddress"
+          name="emailAddress"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          (click)="closeSignupPopup()"
+          class="btn btn-secondary"
+        >
+          ปิด
+        </button>
+        <button type="button" (click)="submitSignup()" class="btn btn-primary">
+          บันทึก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- สร้าง Popup สำหรับการเพิ่มงาน -->
+<div class="popup-overlay" *ngIf="isTaskPopupVisible">
+  <div class="popup-content">
+    <h2 class="mb-4">มอบหมายงาน</h2>
+    <form>
+      <div class="mb-3">
+        <label for="taskName" class="form-label">ชื่องานที่มอบหมาย:</label>
+        <input
+          type="text"
+          id="taskName"
+          name="taskName"
+          [(ngModel)]="taskName"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="taskDescription" class="form-label">รายละเอียดงาน:</label>
+        <input
+          type="text"
+          id="taskDescription"
+          name="taskDescription"
+          [(ngModel)]="taskDescription"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="assignerName" class="form-label">ชื่อผู้มอบหมายงาน:</label>
+        <input
+          type="text"
+          id="assignerName"
+          name="assignerName"
+          [(ngModel)]="assignerName"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="position" class="form-label">ตำแหน่ง:</label>
+        <input
+          type="text"
+          id="position"
+          name="position"
+          [(ngModel)]="position"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="assigneeName" class="form-label"
+          >ชื่อผู้ได้รับมอบหมายงาน:</label
+        >
+        <input
+          type="text"
+          id="assigneeName"
+          name="assigneeName"
+          [(ngModel)]="assigneeName"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="additionalPosition" class="form-label"
+          >ตำแหน่งเพิ่มเติม:</label
+        >
+        <input
+          type="text"
+          id="additionalPosition"
+          name="additionalPosition"
+          [(ngModel)]="additionalPosition"
+          class="form-control"
+        />
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="startDate" class="form-label">วันที่มอบหมายงาน:</label>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            [(ngModel)]="startDate"
+            class="form-control"
+          />
+        </div>
+        <div class="col">
+          <label for="endDate" class="form-label">วันที่สิ้นสุดงาน:</label>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            [(ngModel)]="endDate"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          (click)="onCloseTaskPopup()"
+          class="btn btn-secondary"
+        >
+          ปิด
+        </button>
+        <button type="button" (click)="onSaveTask()" class="btn btn-primary">
+          บันทึก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

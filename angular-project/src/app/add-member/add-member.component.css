@@ -1,0 +1,110 @@
+/* CSS สำหรับตกแต่ง Popup */
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  max-width: 90%;
+  width: 90%;
+  max-height: 80vh; /* Set a maximum height to trigger scrolling */
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+}
+
+/* CSS for left and right column layout */
+.popup-content .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.popup-content .col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.popup-content h2 {
+  color: #007bff;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center; /* จัดตำแหน่งหัวข้อเป็นตรงกลาง */
+}
+
+.popup-content form {
+  max-width: 100%;
+}
+
+.popup-content label {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup-content input,
+.popup-content select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap; /* แนวนอนให้เปลี่ยนเป็นแนวตั้งเมื่อขนาดเล็กกว่า 768px */
+  gap: 10px;
+}
+
+.col {
+  flex: 1;
+  min-width: 200px; /* ขนาดของคอลัมน์เมื่อแสดงเป็นแนวตั้ง */
+}
+
+.d-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* เพิ่ม Responsive CSS */
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-brand img {
+    width: 150px;
+    height: auto;
+  }
+
+  .dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .popup-content {
+    width: 90%; /* ปรับขนาดตามความกว้างของอุปกรณ์เมื่อเป็นแนวตั้ง */
+  }
+}

@@ -1,0 +1,160 @@
+<div class="set-display">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-5">
+        <div class="card rounded-4 text-black">
+          <div class="row g-0">
+            <div class="col-lg">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <img src="../../assets/sis_th.png" alt="logo" />
+                  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <!-- Username input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="username"
+                        >ชื่อผู้ใช้งาน</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="username"
+                        id="username"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && registerForm.controls['username'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['username'].errors['required']
+                          "
+                        >
+                          กรุณาใส่ชื่อผู้ใช้
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="password">รหัสผ่าน</label>
+                      <input
+                        type="password"
+                        formControlName="password"
+                        id="password"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && registerForm.controls['password'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['password'].errors['required']
+                          "
+                        >
+                          กรุณาใส่รหัสผ่าน
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['password'].errors[
+                              'minlength'
+                            ]
+                          "
+                        >
+                          รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="email">อีเมล</label>
+                      <input
+                        type="email"
+                        formControlName="email"
+                        id="email"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && registerForm.controls['email'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['email'].errors['required']
+                          "
+                        >
+                          กรุณาใส่ที่อยู่อีเมล
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['email'].errors['email']
+                          "
+                        >
+                          กรุณาใส่อีเมลที่ถูกต้อง
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- User level input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="position"
+                        >ระดับผู้ใช้</label
+                      >
+                      <select
+                        formControlName="position"
+                        id="position"
+                        class="form-control form-control-lg"
+                      >
+                        <option value="" disabled selected>
+                          เลือกระดับผู้ใช้
+                        </option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Manager</option>
+                        <option value="user">User</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          submitted && registerForm.controls['position'].errors
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="
+                            submitted &&
+                            registerForm.controls['position'].errors['required']
+                          "
+                        >
+                          โปรดเลือกระดับผู้ใช้
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                      สมัครสมาชิก
+                    </button>
+                  </form>
+                  <div class="card-body mb-2" routerLink="/login">
+                    <button type="submit" class="btn btn-outline-secondary">
+                      ลงทะเบียนเรียบร้อยแล้ว? คลิกเพื่อล็อกอิน!!
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

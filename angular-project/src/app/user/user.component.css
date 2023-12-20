@@ -1,0 +1,274 @@
+/* Customize navbar styles here */
+.navbar {
+  padding: 0;
+  background-color: #007bff; /* เปลี่ยนสีพื้นหลังของ navbar */
+}
+
+.navbar-brand img {
+  width: 300px; /* ปรับขนาดของโลโก้ */
+  height: 100; /* ปรับขนาดของโลโก้ */
+  margin-top: 5px; /* ปรับระยะห่างจากด้านบนของโลโก้ */
+}
+
+.btn {
+  margin-right: 20px; /* ปรับระยะห่างระหว่างปุ่ม */
+}
+
+.bi {
+  color: rgb(255, 255, 255);
+  font-size: 34px; /* ปรับขนาดของ icon */
+}
+
+.bi:hover {
+  color: rgb(0, 132, 255);
+}
+
+/* Customize dashboard styles here */
+.container {
+  padding: 20px;
+}
+
+.container-fluid {
+  padding: 10px;
+  display: flex;
+  background-color: #1f1f46; /* เปลี่ยนสีพื้นหลังของ container-fluid */
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+/* ปรับขนาดและสีพื้นหลังของ dashboard-item */
+.dashboard-item {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa; /* เปลี่ยนสีพื้นหลังของ dashboard-item */
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เพิ่มเอฟเฟกต์ shadow ให้ dashboard-item ดูน่าเรียบร้อยขึ้น */
+}
+
+/* เพิ่มเอฟเฟกต์ของ box-shadow เมื่อเมาส์ hover ไปที่ dashboard-item */
+.dashboard-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเอฟเฟกต์ shadow เมื่อ hover ที่ dashboard-item */
+}
+
+/* เพิ่มขนาดของ icon และปรับระยะห่างกลางใน dashboard-item */
+.dashboard-item .bi {
+  color: #007bff;
+  font-size: 48px;
+  margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่างของ icon */
+}
+
+/* ปรับขนาดของปุ่มใน dashboard-item */
+.dashboard-item button {
+  padding: 8px 15px;
+  font-size: 16px;
+  margin-top: 15px; /* เพิ่มระยะห่างด้านบนของปุ่ม */
+}
+
+/* Customize banner styles here */
+.banner {
+  background-color: #777;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* เพิ่ม Responsive CSS */
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-brand img {
+    width: 150px;
+    height: auto;
+  }
+
+  .dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Customize dashboard-box styles here
+    .dashboard-box {
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #fff;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    
+    .dashboard-box h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .dashboard-box i {
+      font-size: 24px;
+      margin-right: 10px;
+    } */
+
+/* ... ส่วนอื่น ๆ ของ CSS เป็นเหมือนเดิม ... */
+
+/* Customize dashboard-header styles here */
+.dashboard-header {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-header h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Customize open-icon styles here */
+.open-icon {
+  cursor: pointer;
+}
+
+.open-icon i {
+  font-size: 24px;
+  color: #007bff;
+}
+
+.open-icon i:hover {
+  color: #0056b3;
+}
+
+/* CSS */
+.popup-overlay {
+  /* ปรับแต่งพื้นหลังของ overlay */
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  /* ปรับแต่งขนาดและสีพื้นหลังของเนื้อหาใน popup */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  max-width: 90%; /* ปรับขนาดตามความกว้างของอุปกรณ์ */
+}
+
+.popup-content h2 {
+  /* ปรับแต่งสีและขนาดของหัวข้อใน popup */
+  color: #007bff;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.popup-content form {
+  /* ปรับแต่งขนาดของฟอร์มใน popup */
+  max-width: 100%;
+}
+
+.popup-content label {
+  /* ปรับแต่งสีและขนาดของ label */
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup-content input,
+.popup-content select {
+  /* ปรับแต่งขนาดและเส้นขอบของ input และ select */
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.row {
+  /* ปรับแต่งระยะห่างระหว่างข้อมูลในแนวนอน */
+  display: flex;
+  flex-wrap: wrap; /* แนวนอนให้เปลี่ยนเป็นแนวตั้งเมื่อขนาดเล็กกว่า 768px */
+  gap: 10px;
+}
+
+.col {
+  /* ปรับแต่งขนาดของคอลัมน์ในแนวนอน */
+  flex: 1;
+  min-width: 200px; /* ขนาดของคอลัมน์เมื่อแสดงเป็นแนวตั้ง */
+}
+
+.d-grid {
+  /* ปรับแต่งการจัดเรียงในกริด */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.btn-secondary {
+  /* ปรับแต่งสีปุ่มยกเลิก */
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-primary {
+  /* ปรับแต่งสีปุ่มสมัครสมาชิก */
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* เพิ่มสีตัวอักษรและขนาดตัวอักษร */
+span.me-3 {
+  color: #007bff; /* สีน้ำเงินเขียว */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* ให้ตัวอักษรเป็นตัวหนา */
+span.me-3 {
+  font-weight: bold;
+}
+
+/* ปรับระยะห่างของตัวอักษรที่ว่างทางขวา (margin-right) */
+span.me-3 {
+  margin-right: 10px;
+}
+
+/* แสดงตัวอักษรในแบบพื้นฐาน (default) ถ้าต้องการเอาสีที่กำหนดข้างบนออก */
+span.me-3 {
+  color: initial;
+  font-size: initial;
+  font-weight: initial;
+  margin-right: initial;
+}
+
+/* ให้ตัวอักษรตกแต่งเป็นลิงก์ */
+span.me-3 {
+  color: #ffffff;
+  /* text-decoration: underline; เส้นใต้ข้อความ */
+  cursor: pointer; /* เมาส์จะแสดงเป็นรูปแสดงว่าเป็นลิงก์ */
+}
+
+/* กำหนดขนาดตัวอักษรตามขนาดหน้าจอ */
+@media screen and (max-width: 576px) {
+  span.me-3 {
+    font-size: 14px;
+  }
+}
