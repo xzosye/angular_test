@@ -139,6 +139,9 @@ export class AdminComponent {
         type: "donut"
       },
       labels: ["Assign", "In progress", "Completed"],
+      title: {
+        text: "Work Progress Chart"
+      },
       responsive: [
         {
           breakpoint: 480,
@@ -148,6 +151,7 @@ export class AdminComponent {
             },
             legend: {
               position: "bottom"
+              
             }
           }
         }
