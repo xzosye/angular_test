@@ -27,8 +27,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ColumComponent } from './colum/colum.component';
-import { DonutComponent } from './donut/donut.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
@@ -42,8 +40,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     PerformanceComponent,
     AddMemberComponent,
     AddTaskPopupComponent,
-    ColumComponent,
-    DonutComponent
+
 
     
   ],
